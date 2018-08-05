@@ -1,4 +1,4 @@
-Mover[] movers =  new Mover[3];
+Mover[] movers =  new Mover[9];
 
 PVector wind = new PVector( 0.1, 0.0 );
 float mu = 0.5; // 摩擦係数

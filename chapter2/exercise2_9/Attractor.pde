@@ -18,6 +18,13 @@ class Attractor
  
  PVector attract( Mover m )
  {
+   PVector force = PVector.sub(location, m.location);
+   float distance = force.mag();
+   distance = constrain(distance, 5.0, 25.0 );
+   force.normalize();
+   float strengh = ( G * mass * m.mass ) / (distance * distance);
+   force.mult(strengh);
    
+   return force;
  }
 }
