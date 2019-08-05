@@ -8,34 +8,48 @@ void setup()
   size(640,360, OPENGL);
   background(255);
   location = new PVector( 100, 100, 100 );
-  velocity = new PVector( 1, 3.3, 2.5 );
+  velocity = new PVector( 5, 8.3, 6.5 );
 }
 
 void draw()
 {
   background(255);
-  translate(320,180,0);
-  rotateX(radians(mouseY));
-  rotateY(radians(mouseX));    
-  box(100,100,100);
-//  location = location.add(velocity);
   
-  /*
-  if( (location.x > width) || (location.x < 0) )
+  pushMatrix();
+  
+  translate(210,175, -200);
+  
+  rotateX(radians(mouseY));
+  rotateY(radians(mouseX));   
+
+  // draw cube
+  noFill();
+  stroke(0);
+  box(300);
+
+  // move ball
+  translate(location.x, location.y, location.z);
+  location.add(velocity);
+  
+  
+  if( (location.x > 150-20) || (location.x < -150+20) )
   {
     velocity.x = velocity.x * (-1);
   }
-  if( (location.y > height) || (location.y < 0) )
+  if( (location.y > 150-20) || (location.y < -150+20) )
   {
     velocity.y = velocity.y * (-1);
   }
-  if( (location.z > height) || (location.z < 0) )
+  if( (location.z > 150-20) || (location.z < -150+20) )
   {
     velocity.z = velocity.z * (-1);
   }
   
-  */
-//  stroke(0);
-  //fill(175);
-//  ellipse(location.x, location.y, 16,16 );
+
+  // draw ball
+  fill(175);
+  noStroke();
+  sphere(20);
+
+  popMatrix();
 }
