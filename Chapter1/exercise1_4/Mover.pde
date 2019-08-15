@@ -2,17 +2,32 @@ class Mover
 {
   PVector location;
   PVector velocity;
+  PVector acceleration;
+  float maxSpeed;
   int moverSize;
  
   Mover()
   {
     location = new PVector(random(width), random(height));
     velocity = new PVector(random(-5,5), random(-5,5));
+    acceleration = new PVector(0.01, 0.01);
+    maxSpeed = 100;
     moverSize = int(random(30)+1);
+  }
+  
+  void limit()
+  {
+    if( velocity.mag() > maxSpeed)
+    {
+      velocity.normalize();
+      velocity.mult(maxSpeed);
+    }
   }
  
   void update()
   {
+    velocity.add(acceleration);
+    velocity.limit(maxSpeed);
     location.add(velocity);
   }
   
