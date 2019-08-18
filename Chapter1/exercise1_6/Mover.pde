@@ -6,6 +6,7 @@ class Mover
   float maxSpeed;
   int moverSize;
   float restitution;   //　反発係数
+  PVector PerlinSeed;
  
   Mover()
   {
@@ -14,7 +15,8 @@ class Mover
     acceleration = new PVector(0, 0);
     maxSpeed = 100;
     moverSize = 50;
-    restitution = 0.94;
+    restitution = 0.98;
+    PerlinSeed = PVector.random2D();
   }
   
   void limit()
@@ -28,6 +30,12 @@ class Mover
    
   void update()
   {
+    acceleration.x = map(noise(PerlinSeed.x), 0, 1, -1, 1);
+    acceleration.y = map(noise(PerlinSeed.y), 0, 1, -1, 1);
+    acceleration.mult(random(2));
+    
+    PerlinSeed.add(0.01,0.01);
+    
     velocity.add(acceleration);
     velocity.limit(maxSpeed);
     location.add(velocity);
