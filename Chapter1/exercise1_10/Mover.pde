@@ -10,11 +10,11 @@ class Mover
 
   Mover()
   {
-    location = new PVector(width/2, height/2);
+    location = new PVector(random(0,width), random(0,height));
     velocity = new PVector(0, 0);
     acceleration = new PVector(0, 0);
     maxSpeed = 100;
-    moverSize = 50;
+    moverSize = random(10,70);
     restitution = 0.98;
   }
 
