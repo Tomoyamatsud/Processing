@@ -35,7 +35,7 @@ class Mover {
   {
     PVector f = PVector.div(force,mass);
     acceleration.add(f);
-    aAcceleration = atan2(velocity.x, velocity.y);
+    //angle = atan2(acceleration.x, acceleration.y);
   }
 
   void display()
@@ -47,8 +47,7 @@ class Mover {
 
     translate(location.x, location.y);
     rotate(angle);
-    triangle(0,0, 25,0, 13, 0);
-    rect(0,0,25, 25);
+    triangle(0,0, 12.5,25, 25, 0);
     popMatrix();
   }
 }
