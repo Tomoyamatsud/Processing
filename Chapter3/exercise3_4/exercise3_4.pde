@@ -1,4 +1,4 @@
-float r = 75;
+float r = 0;
 float theta = 0;
 
 void setup()
@@ -9,12 +9,19 @@ void setup()
 
 void draw()
 {
-  float x = r * cos(theta);
-  float y = r * sin(theta);
-
+  background(255);
   noStroke();
   fill(0);
-  ellipse(x+width/2, y+height/2, 16, 16);
 
-  theta += 0.01;
+  r = 0;
+  
+  while( r < width )
+  {
+    float x = r * cos(theta);
+    float y = r * sin(theta);
+
+    ellipse(x+width/2, y+height/2, 16, 16);
+    theta += 0.01;
+    r+=0.05;
+  }
 }

@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class exercise3_4 extends PApplet {
 
-float r = 75;
+float r = 0;
 float theta = 0;
 
 public void setup()
@@ -25,14 +25,21 @@ public void setup()
 
 public void draw()
 {
-  float x = r * cos(theta);
-  float y = r * sin(theta);
-
+  background(255);
   noStroke();
   fill(0);
-  ellipse(x+width/2, y+height/2, 16, 16);
 
-  theta += 0.01f;
+  r = 0;
+  
+  while( r < width )
+  {
+    float x = r * cos(theta);
+    float y = r * sin(theta);
+
+    ellipse(x+width/2, y+height/2, 16, 16);
+    theta += 0.01f;
+    r+=0.05f;
+  }
 }
   public void settings() {  size(640,360); }
   static public void main(String[] passedArgs) {
