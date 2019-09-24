@@ -57,15 +57,29 @@ class Mover {
     mass = m;
   }
 
-  public void update()
+  public void update( int mode )
   {
-    velocity.add(acceleration);
-    location.add(velocity);
+    if( mode == 0 ) // Forward Mode
+    {
 
-    aVelocity += aAcceleration;
-    angle += aVelocity;
+    }
+    else if( mode == 1 ) // Right Mode
+    {
+      angle += 1;
+      if( angle > 360 )
+      {
+        angle = 0;
+      }
+    }
 
-    acceleration.mult(0);
+    else if( mode == 2 ) // Left mode
+    {
+      angle -= 1;
+      if( angle < -360 )
+      {
+        angle = 0;
+      }
+    }
   }
 
   public void applyForce(PVector force)
