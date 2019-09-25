@@ -9,9 +9,9 @@ class Spaceship{
   float angle;
 
   Spaceship(){
-    location = new PVector( width/2, height/2 );
+    location = new PVector( 0, 0 );
     velocity = new PVector( 0, 0 );
-    acceleration = 0.1;
+    acceleration = 1;
     angle = 0;
     mass = 30;
   }
@@ -20,7 +20,15 @@ class Spaceship{
   {
     if( mode == 0 ) // Forward Mode
     {
-
+      location.x = location.x + sin(radians(angle));
+      location.y = location.y + cos(radians(angle));
+      println("angle:"+angle);
+      println(location.x);
+    }
+    else if( mode == -1 )
+    {
+      location.x = location.x - sin(radians(angle));
+      location.y = location.y - cos(radians(angle));
     }
     else if( mode == 1 ) // Right Mode
     {
@@ -46,8 +54,11 @@ class Spaceship{
     stroke(255);
     fill(0);
 
-    rotate(angle);
-    rect(location.x,location.y,mass*2, mass*2);
+    pushMatrix();
+    translate( location.x, location.y );
+    rotate(radians(angle));
+    rect(0,0, mass, mass);
+    popMatrix();
   }
 }
 
@@ -55,6 +66,7 @@ void setup()
 {
   size(640,360);
   background(0);
+  rectMode(CENTER);
 
   Asteroid = new Spaceship();
 }
@@ -62,12 +74,17 @@ void setup()
 void draw()
 {
   background(0);
+  translate( width/2, height/2 );
 
   if( keyPressed )
   {
-    if( keyCode == 'Z' )
+    if( keyCode == UP )
     {
         Asteroid.update( 0 );
+    }
+    else if( keyCode == DOWN )
+    {
+        Asteroid.update( -1 );
     }
     else if( keyCode == RIGHT )
     {
