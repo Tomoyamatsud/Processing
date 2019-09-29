@@ -14,7 +14,7 @@ class Mover
     velocity = new PVector(0, 0);
     acceleration = new PVector(0, 0);
     maxSpeed = 100;
-    moverSize = random(10,70);
+    moverSize = int(random(10.0,70.0));
     restitution = 0.98;
   }
 

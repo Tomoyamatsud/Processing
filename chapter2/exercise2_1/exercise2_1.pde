@@ -20,7 +20,7 @@ void draw()
 {
   background(255);
   
-  float perlin = map( noise(noise_t), 0, 1, -0.01, 0.05);
+  float perlin = map( noise(noise_t), 0, 1, -0.05, 0.05);
   wind = new PVector( perlin, 0);
 
   for(int i = 0; i<movers.length; i++)

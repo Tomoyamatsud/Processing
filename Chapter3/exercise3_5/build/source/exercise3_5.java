@@ -14,22 +14,21 @@ import java.io.IOException;
 
 public class exercise3_5 extends PApplet {
 
-Spaceship Asteroid;
+Spaceship Yamato;
 
 class Spaceship{
   PVector location;
   PVector velocity;
-  float acceleration;
-  float mass;
-
+  PImage img;
+  float r;
   float angle;
 
   Spaceship(){
     location = new PVector( 0, 0 );
     velocity = new PVector( 0, 0 );
-    acceleration = 1;
+    img = loadImage("spaceship.png");
+    r = 0;
     angle = 0;
-    mass = 30;
   }
 
   public void update( int mode )
@@ -37,18 +36,16 @@ class Spaceship{
     if( mode == 0 ) // Forward Mode
     {
       location.x = location.x + sin(radians(angle));
-      location.y = location.y + cos(radians(angle));
-      println("angle:"+angle);
-      println(location.x);
+      location.y = location.y - cos(radians(angle));
     }
     else if( mode == -1 )
     {
       location.x = location.x - sin(radians(angle));
-      location.y = location.y - cos(radians(angle));
+      location.y = location.y + cos(radians(angle));
     }
     else if( mode == 1 ) // Right Mode
     {
-      angle += 1;
+      angle += 3;
       if( angle > 360 )
       {
         angle = 0;
@@ -57,7 +54,7 @@ class Spaceship{
 
     else if( mode == 2 ) // Left mode
     {
-      angle -= 1;
+      angle -= 3;
       if( angle < -360 )
       {
         angle = 0;
@@ -73,7 +70,7 @@ class Spaceship{
     pushMatrix();
     translate( location.x, location.y );
     rotate(radians(angle));
-    rect(0,0, mass, mass);
+    image(img, 0, 0);
     popMatrix();
   }
 }
@@ -82,9 +79,9 @@ public void setup()
 {
   
   background(0);
-  rectMode(CENTER);
+  imageMode(CENTER);
 
-  Asteroid = new Spaceship();
+  Yamato = new Spaceship();
 }
 
 public void draw()
@@ -96,23 +93,23 @@ public void draw()
   {
     if( keyCode == UP )
     {
-        Asteroid.update( 0 );
+        Yamato.update( 0 );
     }
     else if( keyCode == DOWN )
     {
-        Asteroid.update( -1 );
+        Yamato.update( -1 );
     }
     else if( keyCode == RIGHT )
     {
-        Asteroid.update( 1 );
+        Yamato.update( 1 );
     }
     else if( keyCode == LEFT )
     {
-        Asteroid.update( 2 );
+        Yamato.update( 2 );
     }
   }
 
-  Asteroid.display();
+  Yamato.display();
 }
   public void settings() {  size(640,360); }
   static public void main(String[] passedArgs) {

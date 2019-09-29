@@ -1,18 +1,22 @@
-Spaceship Yamato;
+/* exercise 3.5 別解 */
+/* デカルト座標で考える場合 */
+
+Spaceship Asteroid;
 
 class Spaceship{
   PVector location;
   PVector velocity;
-  PImage img;
-  float r;
+  float acceleration;
+  float mass;
+
   float angle;
 
   Spaceship(){
     location = new PVector( 0, 0 );
     velocity = new PVector( 0, 0 );
-    img = loadImage("spaceship.png");
-    r = 0;
+    acceleration = 1;
     angle = 0;
+    mass = 30;
   }
 
   void update( int mode )
@@ -20,16 +24,18 @@ class Spaceship{
     if( mode == 0 ) // Forward Mode
     {
       location.x = location.x + sin(radians(angle));
-      location.y = location.y - cos(radians(angle));
+      location.y = location.y + cos(radians(angle));
+      println("angle:"+angle);
+      println(location.x);
     }
     else if( mode == -1 )
     {
       location.x = location.x - sin(radians(angle));
-      location.y = location.y + cos(radians(angle));
+      location.y = location.y - cos(radians(angle));
     }
     else if( mode == 1 ) // Right Mode
     {
-      angle += 2;
+      angle += 1;
       if( angle > 360 )
       {
         angle = 0;
@@ -38,7 +44,7 @@ class Spaceship{
 
     else if( mode == 2 ) // Left mode
     {
-      angle -= 2;
+      angle -= 1;
       if( angle < -360 )
       {
         angle = 0;
@@ -54,7 +60,7 @@ class Spaceship{
     pushMatrix();
     translate( location.x, location.y );
     rotate(radians(angle));
-    image(img, 0, 0);
+    rect(0,0, mass, mass);
     popMatrix();
   }
 }
@@ -63,9 +69,9 @@ void setup()
 {
   size(640,360);
   background(0);
-  imageMode(CENTER);
+  rectMode(CENTER);
 
-  Yamato = new Spaceship();
+  Asteroid = new Spaceship();
 }
 
 void draw()
@@ -77,21 +83,21 @@ void draw()
   {
     if( keyCode == UP )
     {
-        Yamato.update( 0 );
+        Asteroid.update( 0 );
     }
     else if( keyCode == DOWN )
     {
-        Yamato.update( -1 );
+        Asteroid.update( -1 );
     }
     else if( keyCode == RIGHT )
     {
-        Yamato.update( 1 );
+        Asteroid.update( 1 );
     }
     else if( keyCode == LEFT )
     {
-        Yamato.update( 2 );
+        Asteroid.update( 2 );
     }
   }
 
-  Yamato.display();
+  Asteroid.display();
 }
