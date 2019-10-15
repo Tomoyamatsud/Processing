@@ -3,7 +3,7 @@ float angleVel = 0.1;
 
 void setup()
 {
-  size(400,200);
+  size(800,200);
 }
 
 void draw()
@@ -12,10 +12,10 @@ void draw()
 
   for( int x = 0; x <= width; x+= 24)
   {
-    float y = map( sin(angle), -1, 1, 0, height);
+    float y = map( noise(angle), -1, 1, 0, height);
     stroke(0);
-    fill(0,50);
-    ellipse(x,y,48,48);
+    noFill();
+    ellipse(x,y,24,24);
     angle += angleVel;
   }
 }

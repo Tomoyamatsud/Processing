@@ -28,14 +28,14 @@ public void draw()
 
   for( int x = 0; x <= width; x+= 24)
   {
-    float y = map( sin(angle), -1, 1, 0, height);
+    float y = map( noise(angle), -1, 1, 0, height);
     stroke(0);
-    fill(0,50);
-    ellipse(x,y,48,48);
+    noFill();
+    ellipse(x,y,24,24);
     angle += angleVel;
   }
 }
-  public void settings() {  size(400,200); }
+  public void settings() {  size(800,200); }
   static public void main(String[] passedArgs) {
     String[] appletArgs = new String[] { "exercise3_9" };
     if (passedArgs != null) {
