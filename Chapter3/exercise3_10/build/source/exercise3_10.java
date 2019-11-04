@@ -14,37 +14,27 @@ import java.io.IOException;
 
 public class exercise3_10 extends PApplet {
 
-Wave[] waves1 = new Wave[10];
-Wave[] waves2 = new Wave[20];
+Wave waves1;
+Wave waves2;
 
 public void setup()
 {
   
 
-  /* waves1\u306e\u521d\u671f\u5316 */
-  for( int i = 0; i < waves1.length; i++ )
-  {
-      waves1[i] = new Wave(random(width), random(height), i);
-  }
+  /* \u914d\u5217\u3067\u306f\u306a\u304f\u3001\u5148\u982d\u306e\u8981\u7d20\u304c\u6c7a\u307e\u308c\u3070\u3001\u6570\u73e0\u7e4b\u304e\u3067\u8868\u793a\u3059\u308b\u7389\u306b\u5909\u66f4\u3059\u308b */
 
+  /* waves1\u306e\u521d\u671f\u5316 */
+  waves1 = new Wave(random(width), random(height), 0, 10);
   /* waves2\u306e\u521d\u671f\u5316 */
-  for( int i = 0; i < waves2.length; i++ )
-  {
-    waves2[i] = new Wave(random(width), random(height), i);
-  }
+  waves2 = new Wave(random(width), random(height), 0, 20);
 }
 
 public void draw()
 {
-  for( int i = 0; i < waves1.length; i++ )
-  {
-    waves1[i].display();
-  }
-
-  for( int i = 0; i < waves2.length; i++ )
-  {
-    waves2[i].display();
-  }
+  background(255);
+  
+  waves1.display();
+  waves2.display();
 }
 
 class Wave
@@ -52,13 +42,19 @@ class Wave
   float xPos;
   float yPos;
   float angle;
+  float amplitude;
+  int waves_num;
+  int size;
 
   /* \u30b3\u30f3\u30b9\u30c8\u30e9\u30af\u30bf */
-  Wave( float initX, float initY, float initAng )
+  Wave( float initX, float initY, float initAng, int num )
   {
     xPos = initX;
     yPos = initY;
     angle = initAng;
+    waves_num = num;
+    amplitude = height;
+    size = 24;
   }
 
   // \u30a4\u30f3\u30b9\u30bf\u30f3\u30b9\u3092\u753b\u9762\u306b\u8868\u793a\u3059\u308b
@@ -66,7 +62,12 @@ class Wave
   {
     stroke(0);
     noFill();
-    ellipse(xPos,yPos,24,24);
+
+    for( int n = 0; n < waves_num; n++ )
+    {
+      ellipse(xPos+n*size,amplitude*sin(angle),24,24);
+      angle += 0.1f;
+    }
   }
 }
   public void settings() {  size(800,200); }
