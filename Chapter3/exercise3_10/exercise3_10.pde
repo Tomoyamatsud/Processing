@@ -1,43 +1,50 @@
-Wave waves1;
-Wave waves2;
+Wave[] waves1;
+Wave[] waves2;
+
+float addangle = 10;
+float addxPos = 24;
 
 void setup()
 {
   size(800,200);
 
-  /* 配列ではなく、先頭の要素が決まれば、数珠繋ぎで表示する玉に変更する */
-
   /* waves1の初期化 */
-  waves1 = new Wave(random(width), random(height), 0, 10);
+  for( int n = 0; n < waves1.length; n++)
+  {
+      waves1[n] = new Wave(n*addxPos, n*addangle);
+  }
   /* waves2の初期化 */
-  waves2 = new Wave(random(width), random(height), 0, 20);
+  for( int n = 0; n < waves2.length; n++)
+  {
+      waves2[n] = new Wave(n*addxPos, n*addngle);
+  }
 }
 
 void draw()
 {
   background(255);
-  
-  waves1.display();
-  waves2.display();
+
+  for( int i = 0; i < waves1.length; n++)
+  {
+    waves1[i].display();
+  }
+  for( int i = 0; i < waves2.length; n++)
+  {
+    waves2[i].display();
+  }
 }
 
 class Wave
 {
   float xPos;
   float yPos;
-  float angle;
-  float amplitude;
-  int waves_num;
   int size;
 
   /* コンストラクタ */
-  Wave( float initX, float initY, float initAng, int num )
+  Wave( float initX, float initAng )
   {
     xPos = initX;
-    yPos = initY;
-    angle = initAng;
-    waves_num = num;
-    amplitude = height;
+    yPos = height*sin(initAng);
     size = 24;
   }
 
@@ -46,11 +53,6 @@ class Wave
   {
     stroke(0);
     noFill();
-
-    for( int n = 0; n < waves_num; n++ )
-    {
-      ellipse(xPos+n*size,amplitude*sin(angle),24,24);
-      angle += 0.1;
-    }
+    ellipse(xPos,yPos,size,size);
   }
 }
